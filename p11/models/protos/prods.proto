@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package models;
+
+message ProdModel{
+    int32 ProdId = 1;
+    string ProdName = 2;
+}
+
+// 休闲鞋
+message ProdRequest{
+    int32 size = 1;
+}
+
+message ProdListResponse{
+    repeated ProdModel data = 1;
+}
