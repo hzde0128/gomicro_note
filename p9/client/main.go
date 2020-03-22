@@ -2,14 +2,16 @@ package main
 
 import (
 	"context"
+	"log"
+
 	"github.com/micro/go-micro/client"
 	"github.com/micro/go-micro/client/selector"
 	"github.com/micro/go-micro/registry"
 	"github.com/micro/go-plugins/client/http"
-	"github.com/micro/go-plugins/registry/consul"
-	"log"
+	"github.com/micro/go-plugins/registry/etcd"
 )
 
+// 由于http的插件还是1.0的，其它的client还是使用v1版本
 // consul 通过轮询获取服务
 // 使用插件 调用http api
 func callAPI(s selector.Selector) {
@@ -29,11 +31,11 @@ func callAPI(s selector.Selector) {
 
 func main() {
 	// consul连接句柄
-	consulReg := consul.NewRegistry(
-		registry.Addrs("127.0.0.1:8500"))
+	etcdReg := etcd.NewRegistry(
+		registry.Addrs("127.0.0.1:2379"))
 
 	sel := selector.NewSelector(
-		selector.Registry(consulReg),
+		selector.Registry(etcdReg),
 		selector.SetStrategy(selector.RoundRobin),
 	)
 	callAPI(sel)

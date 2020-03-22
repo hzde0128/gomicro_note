@@ -9,7 +9,7 @@ import (
 	"github.com/micro/go-micro/client/selector"
 	"github.com/micro/go-micro/registry"
 	"github.com/micro/go-plugins/client/http"
-	"github.com/micro/go-plugins/registry/consul"
+	"github.com/micro/go-plugins/registry/etcd"
 )
 
 // consul 通过轮询获取服务
@@ -32,12 +32,12 @@ func callAPI(s selector.Selector) {
 }
 
 func main() {
-	// consul连接句柄
-	consulReg := consul.NewRegistry(
-		registry.Addrs("127.0.0.1:8500"))
+	// etcd连接句柄
+	etcdReg := etcd.NewRegistry(
+		registry.Addrs("127.0.0.1:2379"))
 
 	sel := selector.NewSelector(
-		selector.Registry(consulReg),
+		selector.Registry(etcdReg),
 		selector.SetStrategy(selector.RoundRobin),
 	)
 	callAPI(sel)
