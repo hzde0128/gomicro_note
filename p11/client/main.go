@@ -2,13 +2,14 @@ package main
 
 import (
 	"context"
+	"gomicro_note/p11/client/models"
+	"log"
+
 	"github.com/micro/go-micro/client"
 	"github.com/micro/go-micro/client/selector"
 	"github.com/micro/go-micro/registry"
 	"github.com/micro/go-plugins/client/http"
 	"github.com/micro/go-plugins/registry/consul"
-	"log"
-	"micro_demo/models"
 )
 
 // consul 通过轮询获取服务
