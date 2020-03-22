@@ -1,18 +1,19 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/micro/go-micro/registry"
-	"github.com/micro/go-micro/web"
-	"github.com/micro/go-plugins/registry/consul"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
+	"github.com/micro/go-micro/v2/registry"
+	"github.com/micro/go-micro/v2/registry/etcd"
+	"github.com/micro/go-micro/v2/web"
 )
 
-// consul 服务注册
-func main(){
+// etcd 服务发现
+func main() {
 
-	consulReg := consul.NewRegistry(
-		registry.Addrs("127.0.0.1:8500"))
+	etcdReg := etcd.NewRegistry(
+		registry.Addrs("127.0.0.1:2379"))
 
 	r := gin.Default()
 	r.Handle("GET", "/", func(c *gin.Context) {
@@ -21,9 +22,9 @@ func main(){
 		})
 	})
 	service := web.NewService(
-		web.Address("127.0.0.1:8000"),
+		web.Address(":8000"),
 		web.Handler(r),
-		web.Registry(consulReg),
+		web.Registry(etcdReg),
 	)
 	service.Run()
 }

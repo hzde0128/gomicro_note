@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/micro/go-micro/web"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
+	"github.com/micro/go-micro/v2/web"
 )
 
 // 使用gin框架
@@ -17,8 +18,8 @@ func main() {
 	})
 	service := web.NewService(
 		web.Name("demo_service"),
-		web.Address("127.0.0.1:8000"),
+		web.Address(":8000"),
 		web.Handler(r),
-		)
+	)
 	service.Run()
 }

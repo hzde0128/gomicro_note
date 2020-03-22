@@ -1,23 +1,26 @@
 package main
 
 import (
-	"github.com/micro/go-micro/client/selector"
-	"github.com/micro/go-micro/registry"
-	"github.com/micro/go-plugins/registry/consul"
 	"log"
 	"time"
+
+	"github.com/micro/go-micro/v2/client/selector"
+	"github.com/micro/go-micro/v2/registry"
+	"github.com/micro/go-micro/v2/registry/etcd"
 )
 
 // consul 通过轮询获取服务
 // 使用前面的方法同时运行3个相同的服务
 // 并测试其它节点关闭时不影响业务
+
 func main() {
-	// consul连接句柄
-	consulReg := consul.NewRegistry(
-		registry.Addrs("127.0.0.1:8500"))
-	for{
+
+	// etcd连接句柄
+	etcdReg := etcd.NewRegistry(
+		registry.Addrs("127.0.0.1:2379"))
+	for {
 		// 获取服务
-		getService, err := consulReg.GetService("ProdSrv")
+		getService, err := etcdReg.GetService("ProdSrv")
 		if err != nil {
 			log.Fatalf("get service failed, err:%v\n", err)
 			return
