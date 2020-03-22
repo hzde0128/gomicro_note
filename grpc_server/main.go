@@ -8,11 +8,11 @@ import (
 	"grpc_server/prods"
 )
 
-func main(){
+func main() {
 
 	etcdReg := etcd.NewRegistry(
 		registry.Addrs("127.0.0.1:2379"),
-		)
+	)
 
 	app := micro.NewService(
 		micro.Name("api.hzde.com.testService"),
@@ -22,7 +22,7 @@ func main(){
 
 	app.Init()
 	err := models.RegisterProdServiceHandler(app.Server(), new(prods.ProdService))
-	if err != nil{
+	if err != nil {
 		panic(err)
 	}
 	app.Run()

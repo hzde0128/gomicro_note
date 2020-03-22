@@ -9,7 +9,7 @@ import (
 )
 
 // 商品服务
-func main(){
+func main() {
 
 	consulReg := consul.NewRegistry(
 		registry.Addrs("127.0.0.1:8500"))
@@ -19,9 +19,9 @@ func main(){
 	v1Group := r.Group("/v1")
 	{
 		v1Group.Handle("POST", "/prods", func(c *gin.Context) {
-			c.JSON(http.StatusOK,gin.H{
+			c.JSON(http.StatusOK, gin.H{
 				"data": NewProdList(2),
-			} )
+			})
 		})
 	}
 

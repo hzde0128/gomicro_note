@@ -10,7 +10,7 @@ import (
 )
 
 // 商品服务
-func main(){
+func main() {
 
 	consulReg := consul.NewRegistry(
 		registry.Addrs("127.0.0.1:8500"))
@@ -23,13 +23,13 @@ func main(){
 			var pr ProdsRequest
 			// 给默认值
 			err := c.Bind(&pr)
-			if err != nil || pr.Size <=0 {
+			if err != nil || pr.Size <= 0 {
 				log.Println(err)
 				pr = ProdsRequest{Size: 2}
 			}
-			c.JSON(http.StatusOK,gin.H{
+			c.JSON(http.StatusOK, gin.H{
 				"data": NewProdList(pr.Size),
-			} )
+			})
 		})
 	}
 

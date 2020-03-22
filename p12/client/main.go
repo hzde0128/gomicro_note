@@ -5,22 +5,22 @@ import (
 	"github.com/micro/go-micro/client"
 	"github.com/micro/go-micro/client/selector"
 	"github.com/micro/go-micro/registry"
+	"github.com/micro/go-plugins/client/http"
 	"github.com/micro/go-plugins/registry/consul"
 	"log"
-	"github.com/micro/go-plugins/client/http"
 	"micro_demo/models"
 )
 
 // consul 通过轮询获取服务
 // 调用http api json tag不一致处理
 // 使用第三方包 github.com/favadi/protoc-go-inject-tag
-func callAPI(s selector.Selector){
+func callAPI(s selector.Selector) {
 	myClient := http.NewClient(
 		client.Selector(s),
 		client.ContentType("application/json"),
-		)
-	req := myClient.NewRequest("ProdSrv","/v1/prods",
-		models.ProdRequest{Size:6})
+	)
+	req := myClient.NewRequest("ProdSrv", "/v1/prods",
+		models.ProdRequest{Size: 6})
 	var rsp models.ProdListResponse
 	err := myClient.Call(context.Background(), req, &rsp)
 	if err != nil {
@@ -30,7 +30,6 @@ func callAPI(s selector.Selector){
 	log.Println(rsp.GetData())
 }
 
-
 func main() {
 	// consul连接句柄
 	consulReg := consul.NewRegistry(
@@ -39,15 +38,7 @@ func main() {
 	sel := selector.NewSelector(
 		selector.Registry(consulReg),
 		selector.SetStrategy(selector.RoundRobin),
-		)
+	)
 	callAPI(sel)
 
 }
-
-
-
-
-
-
-
-
