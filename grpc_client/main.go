@@ -2,12 +2,13 @@ package main
 
 import (
 	"context"
+	"gomicro_note/grpc_client/models"
+
 	"github.com/gin-gonic/gin"
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/registry"
 	"github.com/micro/go-micro/v2/registry/etcd"
 	"github.com/micro/go-micro/v2/web"
-	"grpc_server/models"
 )
 
 func main() {
@@ -18,7 +19,7 @@ func main() {
 
 	service := web.NewService(
 		web.Name("testService.client"),
-		web.Address("127.0.0.1:9000"),
+		web.Address(":9000"),
 		web.Handler(r),
 		web.Registry(etcdReg),
 	)

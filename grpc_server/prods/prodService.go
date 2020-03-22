@@ -2,18 +2,18 @@ package prods
 
 import (
 	"context"
-	"grpc_server/models"
+	"gomicro_note/grpc_server/models"
 	"strconv"
 )
 
-// 服务实现
+// ProdService 商品服务
 type ProdService struct{}
 
 func newProd(id int32, pname string) *models.ProdModel {
 	return &models.ProdModel{ProdId: id, ProdName: pname}
 }
 
-//GetProdList(ctx context.Context, in *ProdRequest, out *ProdListResponse) error
+// GetProdList 返回商品列表
 func (*ProdService) GetProdList(ctx context.Context, in *models.ProdRequest, res *models.ProdListResponse) error {
 	models := make([]*models.ProdModel, 0)
 	var i int32

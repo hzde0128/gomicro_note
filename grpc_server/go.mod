@@ -1,4 +1,4 @@
-module grpc_server
+module gomicro_note/grpc_server
 
 go 1.14
 
