@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"gomicro_note/grpc_client/models"
+	"gomicro_note/p14/models"
 
 	"github.com/gin-gonic/gin"
 	"github.com/micro/go-micro/v2"
@@ -25,7 +25,7 @@ func main() {
 	)
 
 	myService := micro.NewService(micro.Name("tetsService.client"))
-	prodService := models.NewProdService("api.hzde.com.testService", myService.Client())
+	prodService := models.NewProdService("ProdService", myService.Client())
 	v1Group := r.Group("/v1")
 	{
 		v1Group.Handle("POST", "/prods", func(c *gin.Context) {

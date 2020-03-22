@@ -1,8 +1,8 @@
 package main
 
 import (
-	"gomicro_note/grpc_server/models"
-	"gomicro_note/grpc_server/prods"
+	"gomicro_note/p13/models"
+	"gomicro_note/p13/prods"
 
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/registry"
@@ -16,7 +16,7 @@ func main() {
 	)
 
 	app := micro.NewService(
-		micro.Name("api.hzde.com.testService"),
+		micro.Name("ProdService"),
 		micro.Address(":8000"),
 		micro.Registry(etcdReg),
 	)

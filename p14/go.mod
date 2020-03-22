@@ -1,4 +1,4 @@
-module gomicro_note/grpc_client
+module gomicro_note/p14
 
 go 1.14
 
