@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package models;
+
+message TestRequest{
+    int32 id = 1;
+}
+
+message TestResponse{
+    string data=1;
+}
+service TestService{
+    rpc Call(TestRequest) returns(TestResponse);
+}
