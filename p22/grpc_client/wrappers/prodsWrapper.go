@@ -44,10 +44,10 @@ type ProdsWrapper struct {
 func (p *ProdsWrapper) Call(ctx context.Context, req client.Request, rsp interface{}, opts ...client.CallOption) error {
 	cmdName := req.Service() + "." + req.Endpoint()
 	configA := hystrix.CommandConfig{
-		Timeout: 1000, // 超时时间 单位毫秒
-		RequestVolumeThreshold: 5, // 请求数量
-		ErrorPercentThreshold: 50, // 错误百分比
-		SleepWindow: 5000, //尝试正常请求时间 单位毫秒 默认为5秒
+		Timeout:                1000, // 超时时间 单位毫秒
+		RequestVolumeThreshold: 5,    // 请求数量
+		ErrorPercentThreshold:  50,   // 错误百分比
+		SleepWindow:            5000, //尝试正常请求时间 单位毫秒 默认为5秒
 	}
 	hystrix.ConfigureCommand(cmdName, configA)
 	return hystrix.Do(cmdName, func() error {

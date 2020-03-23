@@ -4,8 +4,9 @@ import (
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/registry"
 	"github.com/micro/go-micro/v2/registry/etcd"
-	"gomicro_note/p23/models"
-	"gomicro_note/p23/test"
+
+	"gomicro_note/p27/controllers"
+	"gomicro_note/p27/models"
 )
 
 func main() {
@@ -13,15 +14,14 @@ func main() {
 		registry.Addrs("127.0.0.1:2379"),
 	)
 
-	myService := micro.NewService(
-		micro.Name("test.hzde.com"),
+	app := micro.NewService(
+		micro.Name("api.hzde.com.user"),
 		micro.Address(":8000"),
 		micro.Registry(etcdReg),
 	)
 
-	models.RegisterTestServiceHandler(myService.Server(), new(test.TestService))
+	models.RegisterUserServiceHandler(app.Server(), new(controllers.UserService))
+	app.Init()
 
-	myService.Init()
-
-	myService.Run()
+	app.Run()
 }

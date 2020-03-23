@@ -4,8 +4,8 @@ import (
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/registry"
 	"github.com/micro/go-micro/v2/registry/etcd"
-	"gomicro_note/p23/models"
-	"gomicro_note/p23/test"
+	"gomicro_note/p25/models"
+	"gomicro_note/p25/test"
 )
 
 func main() {
@@ -14,7 +14,7 @@ func main() {
 	)
 
 	myService := micro.NewService(
-		micro.Name("test.hzde.com"),
+		micro.Name("api.hzde.com.test"),
 		micro.Address(":8000"),
 		micro.Registry(etcdReg),
 	)

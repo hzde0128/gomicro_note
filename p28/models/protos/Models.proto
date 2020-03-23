@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package models;
+
+import "google/protobuf/timestamp.proto";
+
+message UserModel{
+    int32 user_id = 1;
+    string user_name = 2;
+    string user_pwd = 3;
+    google.protobuf.Timestamp user_date = 4;
+}
