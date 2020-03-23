@@ -1,12 +1,12 @@
 package main
 
-// 装饰器的使用
+// 降级的使用
 
 import (
 	"context"
 	"fmt"
-	"gomicro_note/p17/grpc_client/models"
-	"gomicro_note/p17/grpc_client/routers"
+	"gomicro_note/p18/grpc_client/models"
+	"gomicro_note/p18/grpc_client/routers"
 
 	"github.com/micro/go-micro/metadata"
 	"github.com/micro/go-micro/v2"

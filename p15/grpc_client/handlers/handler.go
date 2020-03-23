@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// GetProdList 显示商品列表
 func GetProdList(c *gin.Context) {
 	prodService := c.Keys["prodservice"].(models.ProdService)
 	var prodReq models.ProdRequest

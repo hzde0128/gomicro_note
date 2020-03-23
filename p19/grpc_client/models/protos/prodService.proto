@@ -1,0 +1,17 @@
+syntax = "proto3";
+package models;
+
+import "models.proto";
+
+message ProdRequest{
+    // @inject_tag: json:"size", form:"size"
+    int32 size = 1;
+}
+
+message ProdListResponse{
+    repeated ProdModel data = 1;
+}
+
+service ProdService{
+    rpc GetProdList(ProdRequest) returns (ProdListResponse);
+}

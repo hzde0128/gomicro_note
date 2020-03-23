@@ -26,7 +26,7 @@ func (l *logWrapper) Call(ctx context.Context, req client.Request, rsp interface
 	return l.Client.Call(ctx, req, rsp)
 }
 
-func NewLogWrapper(c client.Client) client.Client {
+func newLogWrapper(c client.Client) client.Client {
 	return &logWrapper{c}
 }
 
@@ -38,7 +38,7 @@ func main() {
 
 	myService := micro.NewService(
 		micro.Name("ProdService.client"),
-		micro.WrapClient(NewLogWrapper),
+		micro.WrapClient(newLogWrapper),
 	)
 	prodService := models.NewProdService("ProdService", myService.Client())
 

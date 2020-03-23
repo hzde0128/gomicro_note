@@ -2,9 +2,8 @@ package handlers
 
 import (
 	"context"
-	"gomicro_note/p16/grpc_client/models"
-
 	"github.com/gin-gonic/gin"
+	"gomicro_note/p19/grpc_client/models"
 )
 
 // GetProdList 显示商品列表
@@ -17,9 +16,8 @@ func GetProdList(c *gin.Context) {
 			"status": err.Error()})
 	} else {
 		prodRes, _ := prodService.GetProdList(context.Background(), &prodReq)
-		c.JSON(200, gin.H{
-			"data": prodRes.Data,
-		})
+
+		c.JSON(200, gin.H{"data": prodRes.Data})
 	}
 
 }

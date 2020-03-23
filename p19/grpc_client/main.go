@@ -1,19 +1,19 @@
 package main
 
-// 装饰器的使用
+// 降级的使用
 
 import (
 	"context"
 	"fmt"
-	"gomicro_note/p17/grpc_client/models"
-	"gomicro_note/p17/grpc_client/routers"
-
 	"github.com/micro/go-micro/metadata"
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/client"
 	"github.com/micro/go-micro/v2/registry"
 	"github.com/micro/go-micro/v2/registry/etcd"
 	"github.com/micro/go-micro/v2/web"
+	"gomicro_note/p19/grpc_client/models"
+	"gomicro_note/p19/grpc_client/routers"
+	"gomicro_note/p19/grpc_client/wrappers"
 )
 
 type logWrapper struct {
@@ -39,6 +39,7 @@ func main() {
 	myService := micro.NewService(
 		micro.Name("ProdService.client"),
 		micro.WrapClient(newLogWrapper),
+		micro.WrapClient(wrappers.NewProdsWrapper),
 	)
 	prodService := models.NewProdService("ProdService", myService.Client())
 
