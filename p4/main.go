@@ -3,10 +3,12 @@ package main
 import (
 	"net/http"
 
+	etcd "github.com/asim/go-micro/plugins/registry/etcd/v3"
+	httpServer "github.com/asim/go-micro/plugins/server/http/v3"
+	"github.com/asim/go-micro/v3"
+	"github.com/asim/go-micro/v3/registry"
+	"github.com/asim/go-micro/v3/server"
 	"github.com/gin-gonic/gin"
-	"github.com/micro/go-micro/v2/registry"
-	"github.com/micro/go-micro/v2/registry/etcd"
-	"github.com/micro/go-micro/v2/web"
 )
 
 // 调用函数返回json数据
@@ -24,11 +26,17 @@ func main() {
 		})
 	}
 
-	service := web.NewService(
-		web.Name("ProdSrv"),
-		web.Address(":8000"),
-		web.Handler(r),
-		web.Registry(etcdReg),
+	service := httpServer.NewServer(
+		server.Name("ProdSrv"),
+		server.Address(":8000"),
+		server.Registry(etcdReg),
 	)
-	service.Run()
+
+	hd := service.NewHandler(r)
+	service.Handle(hd)
+	srv := micro.NewService(
+		micro.Server(service),
+	)
+
+	srv.Run()
 }

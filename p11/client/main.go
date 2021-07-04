@@ -2,17 +2,17 @@ package main
 
 import (
 	"context"
-	"gomicro_note/p11/client/models"
 	"log"
+	"micro_demo/p11/models"
 
-	"github.com/micro/go-micro/client"
-	"github.com/micro/go-micro/client/selector"
-	"github.com/micro/go-micro/registry"
-	"github.com/micro/go-plugins/client/http"
-	"github.com/micro/go-plugins/registry/etcd"
+	http "github.com/asim/go-micro/plugins/client/http/v3"
+	etcd "github.com/asim/go-micro/plugins/registry/etcd/v3"
+	"github.com/asim/go-micro/v3/client"
+	"github.com/asim/go-micro/v3/registry"
+	"github.com/asim/go-micro/v3/selector"
 )
 
-// consul 通过轮询获取服务
+// etcd 通过轮询获取服务
 // 调用http api 引入protobuf生成请求响应模型
 func callAPI(s selector.Selector) {
 	myClient := http.NewClient(
@@ -31,7 +31,7 @@ func callAPI(s selector.Selector) {
 }
 
 func main() {
-	// etcd连接句柄
+	// etcd 连接句柄
 	etcdReg := etcd.NewRegistry(
 		registry.Addrs("127.0.0.1:2379"))
 

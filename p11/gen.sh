@@ -1,3 +1,3 @@
 #!/bin/bash
 
-cd models/protos && protoc --micro_out=../ --go_out=../ *.proto && cd -
+protoc --micro_out=./ --go_out=./ models/protos/*.proto

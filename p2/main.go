@@ -1,10 +1,13 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
+	httpServer "github.com/asim/go-micro/plugins/server/http/v3"
+	"github.com/asim/go-micro/v3"
+	"github.com/asim/go-micro/v3/server"
 	"github.com/gin-gonic/gin"
-	"github.com/micro/go-micro/v2/web"
 )
 
 // 使用gin框架
@@ -16,10 +19,17 @@ func main() {
 			"code": http.StatusOK,
 		})
 	})
-	service := web.NewService(
-		web.Name("demo_service"),
-		web.Address(":8000"),
-		web.Handler(r),
+	service := httpServer.NewServer(
+		server.Name("demo_service"),
+		server.Address(":8000"),
 	)
-	service.Run()
+	hd := service.NewHandler(r)
+	service.Handle(hd)
+	srv := micro.NewService(
+		micro.Server(service),
+	)
+	srv.Init()
+	if err := srv.Run(); err != nil {
+		log.Print(err.Error())
+	}
 }

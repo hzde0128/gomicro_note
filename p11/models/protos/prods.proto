@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package models;
 
+option go_package = "./models";
+
 message ProdModel{
     int32 ProdId = 1;
     string ProdName = 2;

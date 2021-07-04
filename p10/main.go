@@ -4,10 +4,12 @@ import (
 	"log"
 	"net/http"
 
+	etcd "github.com/asim/go-micro/plugins/registry/etcd/v3"
+	httpServer "github.com/asim/go-micro/plugins/server/http/v3"
+	"github.com/asim/go-micro/v3"
+	"github.com/asim/go-micro/v3/registry"
+	"github.com/asim/go-micro/v3/server"
 	"github.com/gin-gonic/gin"
-	"github.com/micro/go-micro/v2/registry"
-	"github.com/micro/go-micro/v2/registry/etcd"
-	"github.com/micro/go-micro/v2/web"
 )
 
 // 商品服务
@@ -34,17 +36,22 @@ func main() {
 		})
 	}
 
-	service := web.NewService(
-		web.Name("ProdSrv"),
-		web.Handler(r),
-		web.Registry(etcdReg),
+	service := httpServer.NewServer(
+		server.Name("ProdSrv"),
+		server.Registry(etcdReg),
 	)
 
+	hd := service.NewHandler(r)
+	service.Handle(hd)
+
+	srv := micro.NewService(
+		micro.Server(service),
+	)
 	// 通过命令行参数启动
 	// --server_address 指定地址端口，或者环境变量$MICRO_SERVER_ADDRESS]
 	// 运行2个服务
 	// go run main.go prodModels.go --server_address  127.0.0.1:8000
 	// go run main.go prodModels.go --server_address  127.0.0.1:8001
-	service.Init()
-	service.Run()
+	srv.Init()
+	srv.Run()
 }
