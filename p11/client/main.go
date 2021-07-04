@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
+	"gomicro_note/p11/models"
 	"log"
-	"micro_demo/p11/models"
 
 	http "github.com/asim/go-micro/plugins/client/http/v3"
 	etcd "github.com/asim/go-micro/plugins/registry/etcd/v3"

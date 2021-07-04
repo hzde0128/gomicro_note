@@ -2,17 +2,17 @@ package main
 
 import (
 	"context"
-	"gomicro_note/p12/client/models"
+	"gomicro_note/p12/models"
 	"log"
 
-	"github.com/micro/go-micro/client"
-	"github.com/micro/go-micro/client/selector"
-	"github.com/micro/go-micro/registry"
-	"github.com/micro/go-plugins/client/http"
-	"github.com/micro/go-plugins/registry/etcd"
+	http "github.com/asim/go-micro/plugins/client/http/v3"
+	etcd "github.com/asim/go-micro/plugins/registry/etcd/v3"
+	"github.com/asim/go-micro/v3/client"
+	"github.com/asim/go-micro/v3/registry"
+	"github.com/asim/go-micro/v3/selector"
 )
 
-// consul 通过轮询获取服务
+// etcd 通过轮询获取服务
 // 调用http api json tag不一致处理
 // 使用第三方包 github.com/favadi/protoc-go-inject-tag
 func callAPI(s selector.Selector) {
@@ -32,7 +32,7 @@ func callAPI(s selector.Selector) {
 }
 
 func main() {
-	// etcd连接句柄
+	// etcd 连接句柄
 	etcdReg := etcd.NewRegistry(
 		registry.Addrs("127.0.0.1:2379"))
 

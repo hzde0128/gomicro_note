@@ -2,10 +2,12 @@ syntax = "proto3";
 
 package models;
 
+option go_package = "./models";
+
 message ProdModel{
-    // @inject_tag: json:"pid"
+    // @inject_tag: json:"prod_id"
     int32 ProdId = 1;
-    // @inject_tag: json:"pname"
+    // @inject_tag: json:"prod_name"
     string ProdName = 2;
 }
 
