@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	http "github.com/asim/go-micro/plugins/client/http/v3"
+	httpServer "github.com/asim/go-micro/plugins/client/http/v3"
 	etcd "github.com/asim/go-micro/plugins/registry/etcd/v3"
 	"github.com/asim/go-micro/v3/client"
 	"github.com/asim/go-micro/v3/registry"
@@ -15,7 +15,7 @@ import (
 // etcd 通过轮询获取服务
 // 使用插件 调用http api
 func callAPI(s selector.Selector) (map[string]interface{}, error) {
-	myClient := http.NewClient(
+	myClient := httpServer.NewClient(
 		client.Selector(s),
 		client.ContentType("application/json"),
 	)

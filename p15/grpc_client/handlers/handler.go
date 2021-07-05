@@ -15,11 +15,15 @@ func GetProdList(c *gin.Context) {
 	if err != nil {
 		c.JSON(500, gin.H{
 			"status": err.Error()})
-	} else {
-		prodRes, _ := prodService.GetProdList(context.Background(), &prodReq)
-		c.JSON(200, gin.H{
-			"data": prodRes.Data,
-		})
+		return
 	}
-
+	prodRes, err := prodService.GetProdList(context.Background(), &prodReq)
+	if err != nil {
+		c.JSON(500, gin.H{
+			"status": err.Error()})
+		return
+	}
+	c.JSON(200, gin.H{
+		"data": prodRes.Data,
+	})
 }

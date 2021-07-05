@@ -5,7 +5,7 @@ import (
 	"gomicro_note/p11/models"
 	"log"
 
-	http "github.com/asim/go-micro/plugins/client/http/v3"
+	httpServer "github.com/asim/go-micro/plugins/client/http/v3"
 	etcd "github.com/asim/go-micro/plugins/registry/etcd/v3"
 	"github.com/asim/go-micro/v3/client"
 	"github.com/asim/go-micro/v3/registry"
@@ -15,7 +15,7 @@ import (
 // etcd 通过轮询获取服务
 // 调用http api 引入protobuf生成请求响应模型
 func callAPI(s selector.Selector) {
-	myClient := http.NewClient(
+	myClient := httpServer.NewClient(
 		client.Selector(s),
 		client.ContentType("application/json"),
 	)

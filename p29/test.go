@@ -1,8 +1,9 @@
 package main
 
 import (
-	"gopkg.in/go-playground/validator.v9"
 	"log"
+
+	"gopkg.in/go-playground/validator.v9"
 )
 
 type Users struct {

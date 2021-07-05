@@ -1,17 +1,18 @@
 package appInit
 
 import (
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"gomicro_note/p29/models"
 	"log"
+
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 var db *gorm.DB
 
 func init() {
 	var err error
-	db, err = gorm.Open("mysql", "root:000000aa@tcp(127.0.0.1:3306)/user?charset=utf8&parseTime=True&loc=Local")
+	db, err = gorm.Open("mysql", "root:12345678@tcp(127.0.0.1:3306)/user?charset=utf8&parseTime=True&loc=Local")
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -4,10 +4,11 @@ import (
 	"gomicro_note/p15/grpc_client/models"
 	"gomicro_note/p15/grpc_client/routers"
 
-	"github.com/micro/go-micro/v2"
-	"github.com/micro/go-micro/v2/registry"
-	"github.com/micro/go-micro/v2/registry/etcd"
-	"github.com/micro/go-micro/v2/web"
+	etcd "github.com/asim/go-micro/plugins/registry/etcd/v3"
+	httpServer "github.com/asim/go-micro/plugins/server/http/v3"
+	"github.com/asim/go-micro/v3"
+	"github.com/asim/go-micro/v3/registry"
+	"github.com/asim/go-micro/v3/server"
 )
 
 func main() {
@@ -16,16 +17,22 @@ func main() {
 		registry.Addrs("127.0.0.1:2379"),
 	)
 
+	service := httpServer.NewServer(
+		server.Name("ProdService.client"),
+		server.Address(":9000"),
+		server.Registry(etcdReg),
+	)
+
 	myService := micro.NewService(micro.Name("ProdService.client"))
 	prodService := models.NewProdService("ProdService", myService.Client())
 
-	service := web.NewService(
-		web.Name("ProdService.client"),
-		web.Address(":9000"),
-		web.Handler(routers.InitRouter(prodService)),
-		web.Registry(etcdReg),
+	hd := service.NewHandler(routers.InitRouter(prodService))
+	service.Handle(hd)
+
+	srv := micro.NewService(
+		micro.Server(service),
 	)
 
-	service.Init()
-	service.Run()
+	srv.Init()
+	srv.Run()
 }

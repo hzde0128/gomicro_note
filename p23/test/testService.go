@@ -7,8 +7,7 @@ import (
 )
 
 // TestService 结构体
-type TestService struct{
-	
+type TestService struct {
 }
 
 // Call 方法

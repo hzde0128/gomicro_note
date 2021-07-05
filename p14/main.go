@@ -1,14 +1,17 @@
 package main
 
+// 作为客户端，调用p13的rpc服务
+
 import (
 	"context"
-	"gomicro_note/p14/models"
+	"gomicro_note/p13/models"
 
+	etcd "github.com/asim/go-micro/plugins/registry/etcd/v3"
+	httpServer "github.com/asim/go-micro/plugins/server/http/v3"
+	"github.com/asim/go-micro/v3"
+	"github.com/asim/go-micro/v3/registry"
+	"github.com/asim/go-micro/v3/server"
 	"github.com/gin-gonic/gin"
-	"github.com/micro/go-micro/v2"
-	"github.com/micro/go-micro/v2/registry"
-	"github.com/micro/go-micro/v2/registry/etcd"
-	"github.com/micro/go-micro/v2/web"
 )
 
 func main() {
@@ -17,14 +20,13 @@ func main() {
 		registry.Addrs("127.0.0.1:2379"),
 	)
 
-	service := web.NewService(
-		web.Name("testService.client"),
-		web.Address(":9000"),
-		web.Handler(r),
-		web.Registry(etcdReg),
+	service := httpServer.NewServer(
+		server.Name("testService.client"),
+		server.Address(":9000"),
+		server.Registry(etcdReg),
 	)
 
-	myService := micro.NewService(micro.Name("tetsService.client"))
+	myService := micro.NewService(micro.Name("ProdService.client"))
 	prodService := models.NewProdService("ProdService", myService.Client())
 	v1Group := r.Group("/v1")
 	{
@@ -34,15 +36,27 @@ func main() {
 			if err != nil {
 				c.JSON(500, gin.H{
 					"status": err.Error()})
-			} else {
-				prodRes, _ := prodService.GetProdList(context.Background(), &prodReq)
-				c.JSON(200, gin.H{
-					"data": prodRes.Data,
-				})
+				return
 			}
+			prodRes, err := prodService.GetProdList(context.Background(), &prodReq)
+			if err != nil {
+				c.JSON(500, gin.H{
+					"status": err.Error()})
+				return
+			}
+			c.JSON(200, gin.H{
+				"data": prodRes.Data,
+			})
 		})
 	}
 
-	service.Init()
-	service.Run()
+	hd := service.NewHandler(r)
+	service.Handle(hd)
+
+	srv := micro.NewService(
+		micro.Server(service),
+	)
+
+	srv.Init()
+	srv.Run()
 }

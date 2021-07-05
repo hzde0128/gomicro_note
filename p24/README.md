@@ -7,6 +7,27 @@ export MICRO_REGISTRY=etcd
 export MICRO_REGISTRY_ADDRESS=127.0.0.1:2379
 ```
 
+## 安装micro客户端
+
+```bash
+go get github.com/micro/micro/v3
+```
+
+## 运行server
+
+```bash
+micro server
+```
+
+## 登录
+
+```bash
+micro login
+```
+
+默认账号`admin`
+默认密码`micro`
+
 ## 获取服务的详细信息
 
 ```bash
@@ -26,11 +47,11 @@ test.hzde.com-7e8c75dd-75e9-49a3-a415-48dbfad893ac	[fdf8:292:d5e9:0:ccc:f210:43a
 Endpoint: TestService.Call
 
 Request: {
-	id int32
+  id int32
 }
 
 Response: {
-	data string
+  data string
 }
 ```
 
@@ -44,7 +65,6 @@ micro call test.hzde.com TestService.Call '{"id": 123}'
 
 ```bash
 {
-	"data": "test123"
+  "data": "test123"
 }
 ```
-

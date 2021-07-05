@@ -2,11 +2,11 @@ package wrappers
 
 import (
 	"context"
-	"gomicro_note/p20/grpc_client/models"
+	"gomicro_note/p20/models"
 	"strconv"
 
 	"github.com/afex/hystrix-go/hystrix"
-	"github.com/micro/go-micro/v2/client"
+	"github.com/asim/go-micro/v3/client"
 )
 
 func newProd(id int32, pname string) *models.ProdModel {

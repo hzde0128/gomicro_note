@@ -1,0 +1,24 @@
+syntax = "proto3";
+package models;
+
+option go_package = "./models";
+
+// 商品模型
+message ProdModel{
+    // @inject_tag: json:"pid"
+    int32 ProdId = 1;
+    // @inject_tag: json:"pname"
+    string ProdName = 2;
+}
+
+message ProdRequest{
+    int32 size = 1;
+}
+
+message ProdListResponse{
+    repeated ProdModel data = 1;
+}
+
+service ProdService{
+    rpc GetProdList(ProdRequest) returns (ProdListResponse);
+}

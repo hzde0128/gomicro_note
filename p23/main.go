@@ -1,11 +1,12 @@
 package main
 
 import (
-	"github.com/micro/go-micro/v2"
-	"github.com/micro/go-micro/v2/registry"
-	"github.com/micro/go-micro/v2/registry/etcd"
 	"gomicro_note/p23/models"
 	"gomicro_note/p23/test"
+
+	etcd "github.com/asim/go-micro/plugins/registry/etcd/v3"
+	"github.com/asim/go-micro/v3"
+	"github.com/asim/go-micro/v3/registry"
 )
 
 func main() {

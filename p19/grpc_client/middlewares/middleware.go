@@ -1,7 +1,7 @@
 package middlewares
 
 import (
-	"gomicro_note/p19/grpc_client/models"
+	"gomicro_note/p19/models"
 
 	"github.com/gin-gonic/gin"
 )

@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package models;
 
+option go_package = "./models";
+
 message TestRequest{
     int32 id = 1;
 }

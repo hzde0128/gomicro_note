@@ -5,15 +5,16 @@ package main
 import (
 	"context"
 	"fmt"
-	"gomicro_note/p18/grpc_client/models"
 	"gomicro_note/p18/grpc_client/routers"
+	"gomicro_note/p18/models"
 
-	"github.com/micro/go-micro/metadata"
-	"github.com/micro/go-micro/v2"
-	"github.com/micro/go-micro/v2/client"
-	"github.com/micro/go-micro/v2/registry"
-	"github.com/micro/go-micro/v2/registry/etcd"
-	"github.com/micro/go-micro/v2/web"
+	etcd "github.com/asim/go-micro/plugins/registry/etcd/v3"
+	httpServer "github.com/asim/go-micro/plugins/server/http/v3"
+	"github.com/asim/go-micro/v3"
+	"github.com/asim/go-micro/v3/client"
+	"github.com/asim/go-micro/v3/metadata"
+	"github.com/asim/go-micro/v3/registry"
+	"github.com/asim/go-micro/v3/server"
 )
 
 type logWrapper struct {
@@ -42,13 +43,19 @@ func main() {
 	)
 	prodService := models.NewProdService("ProdService", myService.Client())
 
-	service := web.NewService(
-		web.Name("ProdService.client"),
-		web.Address(":9000"),
-		web.Handler(routers.InitRouter(prodService)),
-		web.Registry(etcdReg),
+	service := httpServer.NewServer(
+		server.Name("ProdService.client"),
+		server.Address(":9000"),
+		server.Registry(etcdReg),
 	)
 
-	service.Init()
-	service.Run()
+	hd := service.NewHandler(routers.InitRouter(prodService))
+	service.Handle(hd)
+
+	srv := micro.NewService(
+		micro.Server(service),
+	)
+
+	srv.Init()
+	srv.Run()
 }
