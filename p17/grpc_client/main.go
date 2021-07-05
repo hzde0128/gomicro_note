@@ -46,7 +46,6 @@ func main() {
 	service := httpServer.NewServer(
 		server.Name("ProdService.client"),
 		server.Address(":9000"),
-		server.Registry(etcdReg),
 	)
 
 	hd := service.NewHandler(routers.InitRouter(prodService))
@@ -54,6 +53,7 @@ func main() {
 
 	srv := micro.NewService(
 		micro.Server(service),
+		micro.Registry(etcdReg),
 	)
 
 	srv.Init()

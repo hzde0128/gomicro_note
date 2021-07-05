@@ -16,26 +16,28 @@ func GetProdList(c *gin.Context) {
 	if err != nil {
 		c.JSON(500, gin.H{
 			"status": err.Error()})
+		return
+	}
+	if prodReq.Size == 0 {
+		prodReq.Size = 2
+	}
+	// 超时代码
+	// 1.配置config
+	configA := hystrix.CommandConfig{
+		Timeout: 5000,
+	}
+	// 2.配置command
+	hystrix.ConfigureCommand("getProds", configA)
+	// 3.执行Do方法
+	var prodRes *models.ProdListResponse
+	err = hystrix.Do("getProds", func() error {
+		prodRes, err = prodService.GetProdList(context.Background(), &prodReq)
+		return err
+	}, nil)
+	if err != nil {
+		c.JSON(500, gin.H{"status": err.Error()})
 	} else {
-		// 超时代码
-		// 1.配置config
-		configA := hystrix.CommandConfig{
-			Timeout: 5000,
-		}
-		// 2.配置command
-		hystrix.ConfigureCommand("getProds", configA)
-		// 3.执行Do方法
-		var prodRes *models.ProdListResponse
-		err := hystrix.Do("getProds", func() error {
-			prodRes, err = prodService.GetProdList(context.Background(), &prodReq)
-			return err
-		}, nil)
-		if err != nil {
-			c.JSON(500, gin.H{"status": err.Error()})
-		} else {
-			c.JSON(200, gin.H{"data": prodRes.Data})
-		}
-
+		c.JSON(200, gin.H{"data": prodRes.Data})
 	}
 
 }

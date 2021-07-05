@@ -54,6 +54,7 @@ func main() {
 
 	srv := micro.NewService(
 		micro.Server(service),
+		micro.Registry(etcdReg),
 	)
 
 	srv.Init()

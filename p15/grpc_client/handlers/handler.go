@@ -17,6 +17,9 @@ func GetProdList(c *gin.Context) {
 			"status": err.Error()})
 		return
 	}
+	if prodReq.Size == 0 {
+		prodReq.Size = 2
+	}
 	prodRes, err := prodService.GetProdList(context.Background(), &prodReq)
 	if err != nil {
 		c.JSON(500, gin.H{

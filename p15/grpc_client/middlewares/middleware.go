@@ -11,5 +11,6 @@ func InitMiddleware(prodService models.ProdService) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Keys = make(map[string]interface{})
 		c.Keys["prodservice"] = prodService
+		c.Next()
 	}
 }
