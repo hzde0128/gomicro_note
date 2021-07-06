@@ -15,7 +15,7 @@ import (
 
 func main() {
 
-	// etcd连接句柄
+	// etcd 连接句柄
 	etcdReg := etcd.NewRegistry(
 		registry.Addrs("127.0.0.1:2379"))
 	for {

@@ -1,11 +1,12 @@
 package main
 
 import (
+	"gomicro_note/p25/models"
+	"gomicro_note/p25/test"
+
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/registry"
 	"github.com/micro/go-micro/v2/registry/etcd"
-	"gomicro_note/p25/models"
-	"gomicro_note/p25/test"
 )
 
 func main() {

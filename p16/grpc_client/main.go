@@ -8,9 +8,9 @@ import (
 	"gomicro_note/p16/grpc_client/models"
 	"gomicro_note/p16/grpc_client/routers"
 
-	"github.com/micro/go-micro/metadata"
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/client"
+	"github.com/micro/go-micro/v2/metadata"
 	"github.com/micro/go-micro/v2/registry"
 	"github.com/micro/go-micro/v2/registry/etcd"
 	"github.com/micro/go-micro/v2/web"

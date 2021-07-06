@@ -37,6 +37,7 @@ func main() {
 	service := web.NewService(
 		web.Name("ProdSrv"),
 		web.Handler(r),
+		web.Metadata(map[string]string{"protocol": "http"}),
 		web.Registry(etcdReg),
 	)
 

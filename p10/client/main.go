@@ -4,14 +4,14 @@ import (
 	"context"
 	"log"
 
-	"github.com/micro/go-micro/client"
-	"github.com/micro/go-micro/client/selector"
-	"github.com/micro/go-micro/registry"
-	"github.com/micro/go-plugins/client/http"
-	"github.com/micro/go-plugins/registry/etcd"
+	"github.com/micro/go-micro/v2/client"
+	"github.com/micro/go-micro/v2/client/selector"
+	"github.com/micro/go-micro/v2/registry"
+	http "github.com/micro/go-plugins/client/http/v2"
+	etcd "github.com/micro/go-plugins/registry/etcd/v2"
 )
 
-// consul 通过轮询获取服务
+// etcd 通过轮询获取服务
 // 使用插件 调用http api 带参数调用
 func callAPI(s selector.Selector) {
 	myClient := http.NewClient(

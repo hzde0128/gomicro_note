@@ -4,6 +4,7 @@ package models;
 import "models.proto";
 
 message ProdRequest{
+    // @inject_tag: form:"size" json:"size"
     int32 size = 1;
 }
 

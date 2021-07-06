@@ -5,11 +5,11 @@ import (
 	"gomicro_note/p12/client/models"
 	"log"
 
-	"github.com/micro/go-micro/client"
-	"github.com/micro/go-micro/client/selector"
-	"github.com/micro/go-micro/registry"
-	"github.com/micro/go-plugins/client/http"
-	"github.com/micro/go-plugins/registry/etcd"
+	"github.com/micro/go-micro/v2/client"
+	"github.com/micro/go-micro/v2/client/selector"
+	"github.com/micro/go-micro/v2/registry"
+	http "github.com/micro/go-plugins/client/http/v2"
+	etcd "github.com/micro/go-plugins/registry/etcd/v2"
 )
 
 // consul 通过轮询获取服务

@@ -8,11 +8,11 @@ import (
 	"github.com/micro/go-micro/v2/registry/etcd"
 )
 
-// consul 服务发现 selector随机选择
+// etcd 服务发现 selector随机选择
 // 前提是要启动前面的ProdSrv服务
 
 func main() {
-	// consul连接句柄
+	// etcd 连接句柄
 	etcdReg := etcd.NewRegistry(
 		registry.Addrs("127.0.0.1:2379"))
 

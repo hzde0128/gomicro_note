@@ -10,7 +10,7 @@ import (
 	"github.com/micro/go-micro/v2/registry/etcd"
 )
 
-// consul 通过轮询获取服务
+// etcd 通过轮询获取服务
 // 前提启动之前多个后端服务
 // 基本方式调用后端服务
 
@@ -30,7 +30,7 @@ func callAPI(addr, path, method string) (string, error) {
 }
 
 func main() {
-	// etcd连接句柄
+	// etcd 连接句柄
 	etcdReg := etcd.NewRegistry(
 		registry.Addrs("127.0.0.1:2379"))
 

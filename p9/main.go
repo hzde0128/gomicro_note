@@ -1,11 +1,12 @@
 package main
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/micro/go-micro/v2/registry"
 	"github.com/micro/go-micro/v2/registry/etcd"
 	"github.com/micro/go-micro/v2/web"
-	"net/http"
 )
 
 // 商品服务
@@ -28,6 +29,7 @@ func main() {
 	service := web.NewService(
 		web.Name("ProdSrv"),
 		web.Handler(r),
+		web.Metadata(map[string]string{"protocol": "http"}),
 		web.Registry(etcdReg),
 	)
 
