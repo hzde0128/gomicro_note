@@ -2,7 +2,7 @@ package prods
 
 import (
 	"context"
-	"gomicro_note/p18/grpc_server/models"
+	"gomicro_note/p18/models"
 	"strconv"
 	"time"
 )

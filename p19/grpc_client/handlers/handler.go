@@ -2,8 +2,9 @@ package handlers
 
 import (
 	"context"
+	"gomicro_note/p19/models"
+
 	"github.com/gin-gonic/gin"
-	"gomicro_note/p19/grpc_client/models"
 )
 
 // GetProdList 显示商品列表

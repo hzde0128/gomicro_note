@@ -15,7 +15,9 @@ require (
 	github.com/mattn/go-isatty v0.0.13 // indirect
 	github.com/micro/go-micro/v2 v2.9.1
 	github.com/micro/go-plugins/client/http/v2 v2.9.1
+	github.com/micro/go-plugins/registry/consul/v2 v2.9.1 // indirect
 	github.com/micro/go-plugins/registry/etcd/v2 v2.9.1
+	github.com/micro/micro/v2 v2.9.3 // indirect
 	github.com/prometheus/client_golang v1.2.1 // indirect
 	github.com/ugorji/go v1.2.6 // indirect
 	golang.org/x/crypto v0.0.0-20210616213533-5ff15b29337e // indirect

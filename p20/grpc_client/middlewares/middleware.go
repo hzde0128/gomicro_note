@@ -2,7 +2,7 @@ package middlewares
 
 import (
 	"fmt"
-	"gomicro_note/p20/grpc_client/models"
+	"gomicro_note/p20/models"
 
 	"github.com/gin-gonic/gin"
 )

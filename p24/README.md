@@ -3,8 +3,8 @@
 ## 环境变量设置
 
 ```bash
-export MICRO_REGISTRY=etcd
-export MICRO_REGISTRY_ADDRESS=127.0.0.1:2379
+export MICRO_REGISTRY=consul
+export MICRO_REGISTRY_ADDRESS=127.0.0.1:8500
 ```
 
 ## 获取服务的详细信息

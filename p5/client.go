@@ -5,19 +5,19 @@ import (
 
 	"github.com/micro/go-micro/v2/client/selector"
 	"github.com/micro/go-micro/v2/registry"
-	"github.com/micro/go-micro/v2/registry/etcd"
+	"github.com/micro/go-plugins/registry/consul/v2"
 )
 
-// etcd 服务发现 selector随机选择
+// consul 服务发现 selector随机选择
 // 前提是要启动前面的ProdSrv服务
 
 func main() {
-	// etcd 连接句柄
-	etcdReg := etcd.NewRegistry(
-		registry.Addrs("127.0.0.1:2379"))
+	// consul 连接句柄
+	consulReg := consul.NewRegistry(
+		registry.Addrs("127.0.0.1:8500"))
 
 	// 获取服务
-	getService, err := etcdReg.GetService("ProdSrv")
+	getService, err := consulReg.GetService("ProdSrv")
 	if err != nil {
 		log.Fatalf("get service failed, err:%v\n", err)
 		return

@@ -4,8 +4,8 @@ import "strconv"
 
 // ProdModel 商品模型
 type ProdModel struct {
-	ProdID   int
-	ProdName string
+	ProdID   int    `json:"prod_id"`
+	ProdName string `json:"prod_name"`
 }
 
 // NewProd 新增商品

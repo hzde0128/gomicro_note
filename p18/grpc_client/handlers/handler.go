@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"context"
-	"gomicro_note/p18/grpc_client/models"
+	"gomicro_note/p18/models"
 	"strconv"
 
 	"github.com/afex/hystrix-go/hystrix"

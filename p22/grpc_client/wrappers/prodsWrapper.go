@@ -2,7 +2,7 @@ package wrappers
 
 import (
 	"context"
-	"gomicro_note/p22/grpc_client/models"
+	"gomicro_note/p22/models"
 	"strconv"
 
 	"github.com/afex/hystrix-go/hystrix"

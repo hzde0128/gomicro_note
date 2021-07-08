@@ -3,7 +3,7 @@ package routers
 import (
 	"gomicro_note/p19/grpc_client/handlers"
 	"gomicro_note/p19/grpc_client/middlewares"
-	"gomicro_note/p19/grpc_client/models"
+	"gomicro_note/p19/models"
 
 	"github.com/gin-gonic/gin"
 )
